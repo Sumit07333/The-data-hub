@@ -61,11 +61,9 @@ app.use((err, req, res, next) => {
 });
 
 // 8. Port Configuration
-// Port 5000 as strictly mandated by Sprint 09 Track B assignment
-const PORT = 5000;
+// Uses Render's PORT in production, while keeping port 5000 locally
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = app;
