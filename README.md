@@ -1,98 +1,162 @@
-# The Data Hub — RESTful API Server
+The Data Hub — RESTful API Server
 
-## 1. Project Name
-**The Data Hub** — Sprint 09: Track B (Fullstack Developer)
+Project Name
 
----
+The Data Hub — Sprint 09: Track B (Fullstack Developer)
 
-## 2. Project Description
-The Data Hub is a backend RESTful API server built using Node.js and Express. It manages blog post resources with complete in-memory CRUD (Create, Read, Update, Delete) functionality, custom request logging middleware, and mock authentication scaffolding. 
+Project Description
 
-This project is built strictly to satisfy the **Sprint 09 Track B** requirements. It operates with an in-memory JavaScript array without any external database dependencies.
+The Data Hub is a backend RESTful API server built using Node.js and Express. It manages blog post resources with complete in-memory CRUD (Create, Read, Update, Delete) functionality, custom request logging middleware, and mock authentication scaffolding.
 
----
+This project is built to satisfy the Sprint 09 Track B requirements. It uses an in-memory JavaScript array and does not use an external database in Sprint 09.
 
-## 3. Technologies Used
-- **Runtime Environment:** Node.js
-- **Framework:** Express (v4.21.2)
-- **Data Store:** In-memory JavaScript Array (`blogPosts = []`)
-- **Developer Tool:** Nodemon (v3.1.14)
-- **API Testing:** Postman / Thunder Client / cURL
+Live Deployment
 
----
+The Data Hub API is deployed on Render.
 
-## 4. Installation Instructions
+Live API URL:
+https://the-data-hub-qa8v.onrender.com
+
+API Status / Root Endpoint:
+https://the-data-hub-qa8v.onrender.com/
+
+The root endpoint returns the API name, online status, and available endpoints.
+
+The deployed API can be tested directly using Postman.
+
+Technologies Used
+
+Runtime: Node.js
+
+Framework: Express v4.21.2
+
+Data Store: In-memory JavaScript Array (blogPosts = [])
+
+Development Tool: Nodemon v3.1.14
+
+API Testing: Postman / Thunder Client / cURL
+
+Deployment: Render
+
+Version Control: Git / GitHub
+
+Installation
+
 Clone the repository and install dependencies:
 
-```bash
 npm install
-```
 
----
+Running the Server
 
-## 5. How to Start the Server
-To run the server in production mode:
-```bash
+Production Mode
+
 npm start
-```
 
-To run the server in development mode with automatic reload on changes:
-```bash
+Development Mode
+
 npm run dev
-```
 
-The server listens on **Port 5000** by default:
-```
+The server runs on port 5000 locally by default.
+
 Server running on port 5000
-```
-Accessible locally at: `http://localhost:5000`
 
----
+Local API:
 
-## 6. Available Endpoints
+http://localhost:5000
 
-| Method | Endpoint | Description | Status Code |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/` | API status and endpoint discovery | 200 OK |
-| `GET` | `/posts` | Retrieve all blog posts | 200 OK |
-| `GET` | `/posts/:id` | Retrieve a specific blog post by ID | 200 OK / 404 Not Found |
-| `POST` | `/posts` | Create a new blog post | 201 Created / 400 Bad Request |
-| `PUT` | `/posts/:id` | Update an existing blog post by ID | 200 OK / 400 Bad Request / 404 Not Found |
-| `DELETE` | `/posts/:id` | Delete a blog post by ID | 200 OK / 404 Not Found |
-| `POST` | `/login` | Mock authentication endpoint returning mock JWT | 200 OK / 400 Bad Request |
+For deployment, the application uses the platform-provided PORT environment variable while keeping port 5000 as the local fallback.
 
----
+REST API Endpoints
 
-## 7. Example Request & Response Payloads
+Method
 
-### 1. `POST /posts` (Create Post)
-**Headers:**
-`Content-Type: application/json`
+Endpoint
 
-**Request Body:**
-```json
+Description
+
+Expected Status
+
+GET
+
+/
+
+API status and endpoint discovery
+
+200 OK
+
+GET
+
+/posts
+
+Retrieve all blog posts
+
+200 OK
+
+GET
+
+/posts/:id
+
+Retrieve a specific blog post
+
+200 OK / 404 Not Found
+
+POST
+
+/posts
+
+Create a new blog post
+
+201 Created / 400 Bad Request
+
+PUT
+
+/posts/:id
+
+Update an existing blog post
+
+200 OK / 404 Not Found
+
+DELETE
+
+/posts/:id
+
+Delete a blog post
+
+200 OK / 404 Not Found
+
+POST
+
+/login
+
+Mock authentication returning a mock JWT
+
+200 OK / 400 Bad Request
+
+Example Requests and Responses
+
+POST /posts — Create a Post
+
+Request Body:
+
 {
   "title": "My First Post",
   "content": "This is my first blog post.",
   "author": "Aman"
 }
-```
 
-**Response (HTTP 201 Created):**
-```json
+Response — 201 Created:
+
 {
   "id": 1,
   "title": "My First Post",
   "content": "This is my first blog post.",
   "author": "Aman"
 }
-```
 
----
+GET /posts — Retrieve All Posts
 
-### 2. `GET /posts` (Retrieve All Posts)
-**Response (HTTP 200 OK):**
-```json
+Response — 200 OK:
+
 [
   {
     "id": 1,
@@ -101,135 +165,232 @@ Accessible locally at: `http://localhost:5000`
     "author": "Aman"
   }
 ]
-```
 
----
+GET /posts/:id — Retrieve a Single Post
 
-### 3. `GET /posts/:id` (Retrieve Single Post)
-**URL:** `http://localhost:5000/posts/1`
+Example:
 
-**Response (HTTP 200 OK):**
-```json
+http://localhost:5000/posts/1
+
+Response — 200 OK:
+
 {
   "id": 1,
   "title": "My First Post",
   "content": "This is my first blog post.",
   "author": "Aman"
 }
-```
 
-**Error Response (HTTP 404 Not Found):**
-```json
+Error Response — 404 Not Found:
+
 {
   "error": "Post not found"
 }
-```
 
----
+PUT /posts/:id — Update a Post
 
-### 4. `PUT /posts/:id` (Update Post)
-**URL:** `http://localhost:5000/posts/1`  
-**Headers:** `Content-Type: application/json`
+Example:
 
-**Request Body:**
-```json
+http://localhost:5000/posts/1
+
+Request Body:
+
 {
   "title": "Updated First Post",
   "content": "Updated content for the first blog post."
 }
-```
 
-**Response (HTTP 200 OK):**
-```json
+Response — 200 OK:
+
 {
   "id": 1,
   "title": "Updated First Post",
   "content": "Updated content for the first blog post.",
   "author": "Aman"
 }
-```
 
----
+DELETE /posts/:id — Delete a Post
 
-### 5. `DELETE /posts/:id` (Delete Post)
-**URL:** `http://localhost:5000/posts/1`
+Example:
 
-**Response (HTTP 200 OK):**
-```json
+http://localhost:5000/posts/1
+
+Response — 200 OK:
+
 {
   "message": "Post deleted successfully"
 }
-```
 
----
+POST /login — Mock Authentication
 
-### 6. `POST /login` (Mock Authentication)
-**Headers:** `Content-Type: application/json`
+Request Body:
 
-**Request Body:**
-```json
 {
   "email": "user@example.com",
   "password": "password123"
 }
-```
 
-**Response (HTTP 200 OK):**
-```json
+Response — 200 OK:
+
 {
   "message": "Login successful",
   "token": "mock-jwt-token"
 }
-```
-*Note: This is a mock authentication endpoint designed for Sprint 09 scaffolding and does not perform real database verification or production cryptography.*
 
----
+This is mock authentication scaffolding for Sprint 09. It does not perform real database verification or production authentication.
 
-## 8. Postman / Thunder Client Testing Instructions
-Open Postman or Thunder Client and follow this sequence:
+Postman Testing
 
-1. **Test 1 — POST /posts**: Set method to `POST`, URL to `http://localhost:5000/posts`, Body to JSON: `{"title": "My First Post", "content": "This is my first post.", "author": "Aman"}`. Verify status is **201 Created** and returned object includes `id: 1`.
-2. **Test 2 — POST /posts**: Send a second post with title `"Second Post"` and verify it returns `id: 2`.
-3. **Test 3 — GET /posts**: Set method to `GET`, URL to `http://localhost:5000/posts`. Verify status is **200 OK** and array contains both posts.
-4. **Test 4 — GET /posts/1**: Set method to `GET`, URL to `http://localhost:5000/posts/1`. Verify status is **200 OK** and post 1 is returned.
-5. **Test 5 — PUT /posts/1**: Set method to `PUT`, URL to `http://localhost:5000/posts/1`, Body: `{"title": "Updated Post", "content": "Updated content"}`. Verify status is **200 OK** and updated fields are returned.
-6. **Test 6 — GET /posts/1**: Retrieve post 1 again to verify changes are in memory.
-7. **Test 7 — DELETE /posts/1**: Set method to `DELETE`, URL to `http://localhost:5000/posts/1`. Verify status is **200 OK** with message `"Post deleted successfully"`.
-8. **Test 8 — GET /posts/1**: Verify status is **404 Not Found** with `{"error": "Post not found"}`.
-9. **Test 9 — GET /posts**: Verify only post 2 remains in the array.
-10. **Test 10 — POST /login**: Send JSON with `email` and `password`. Verify status is **200 OK** and `token: "mock-jwt-token"` is returned.
-11. **Negative Validation Tests**:
-   - `POST /posts` with `{ "content": "no title" }` -> verify **400 Bad Request**.
-   - `GET /posts/9999` -> verify **404 Not Found**.
-   - `PUT /posts/9999` -> verify **404 Not Found**.
-   - `DELETE /posts/9999` -> verify **404 Not Found**.
+The API was tested using Postman locally and on the deployed Render URL.
 
----
+Local Base URL
 
-## 9. Project Structure
-```
+http://localhost:5000
+
+Live Base URL
+
+https://the-data-hub-qa8v.onrender.com
+
+Tested Operations
+
+POST /posts — Create post
+
+GET /posts — Retrieve all posts
+
+GET /posts/1 — Retrieve a specific post
+
+PUT /posts/1 — Update post
+
+DELETE /posts/1 — Delete post
+
+GET /posts — Verify remaining data
+
+POST /login — Verify mock JWT authentication
+
+GET /posts/999 — Verify 404 error handling
+
+The deployed CRUD endpoints and login endpoint were successfully verified through Postman.
+
+Custom Request Logger
+
+The project includes custom middleware that logs every incoming HTTP request.
+
+Example log format:
+
+[GET] /posts - 06:03 PM
+[POST] /posts - 06:16 PM
+[PUT] /posts/1 - 06:55 PM
+[DELETE] /posts/1 - 06:56 PM
+[POST] /login - 07:02 PM
+
+The logger records:
+
+HTTP Method
+
+Request URL
+
+Timestamp
+
+Project Structure
+
 the-data-hub/
-├── server.js               # Application entry point, Express config & server listening
+
+├── server.js
 ├── routes/
-│   └── postRoutes.js       # RESTful route definitions for /posts
+│   └── postRoutes.js
 ├── controllers/
-│   └── postController.js   # In-memory blogPosts array and CRUD business logic
+│   └── postController.js
 ├── middleware/
-│   └── logger.js           # Custom request logging middleware ([METHOD] URL - TIME)
-├── package.json            # Project manifest, scripts, and dependencies
-├── .gitignore              # Ignores node_modules and local development artifacts
-├── Prompts.md              # Documented AI prompts used during development
-└── README.md               # Project documentation and API guide
-```
+│   └── logger.js
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── .env.example
+├── Prompts.md
+└── README.md
 
----
+Main Files
 
-## 10. Sprint 09 Objective
-The objective of Sprint 09 Track B is to master server initialization, REST routing conventions, request body parsing with `express.json()`, custom middleware design, and HTTP status code semantics using pure Node.js and Express.
+server.js — Express application entry point and server configuration
 
----
+routes/postRoutes.js — RESTful route definitions for /posts
 
-## 11. Sprint 10 Note (Data Persistence)
-> **IMPORTANT:** In Sprint 09, all data is strictly stored in an **in-memory JavaScript array (`blogPosts = []`)**. 
-> All data resets when the server process terminates.
-> In **Sprint 10 Track B**, this in-memory data store will be replaced with **MongoDB Atlas + Mongoose**. The controller-based architecture was chosen so that in Sprint 10, only the controller functions will be updated to query Mongoose models without having to restructure routes or the server entry point. No MongoDB or Mongoose packages are installed or used in Sprint 09.
+controllers/postController.js — In-memory blog post CRUD logic
+
+middleware/logger.js — Custom request logging middleware
+
+Prompts.md — AI prompts used during development
+
+README.md — Project documentation and API guide
+
+Sprint 09 Objective
+
+The objective of Sprint 09 Track B is to implement and understand:
+
+Node.js server initialization
+
+Express.js
+
+REST API architecture
+
+RESTful routing
+
+HTTP methods
+
+Request body parsing using express.json()
+
+In-memory data management
+
+CRUD operations
+
+Custom middleware
+
+HTTP status codes
+
+API testing using Postman
+
+Mock authentication scaffolding
+
+Deployment of an Express API
+
+Data Storage
+
+Sprint 09 intentionally uses an in-memory JavaScript array:
+
+let blogPosts = [];
+
+No external database is used in Sprint 09.
+
+Because the data is stored in memory, posts reset whenever the server process or deployed service restarts.
+
+Sprint 10 Note
+
+Sprint 10 will extend this project by replacing the Sprint 09 in-memory data store with persistent MongoDB Atlas + Mongoose storage.
+
+Sprint 09 does not use MongoDB or Mongoose.
+
+The current controller-based architecture is intended to make future database integration easier without restructuring the REST routes.
+
+Deployment
+
+The API is deployed on Render.
+
+Live API:
+
+https://the-data-hub-qa8v.onrender.com
+
+API Status:
+
+https://the-data-hub-qa8v.onrender.com/
+
+GitHub Repository
+
+Source Code:
+
+https://github.com/Sumit07333/The-data-hub
+
+Author
+
+Sprint 09 Track B — Fullstack Developer
+
+Project: The Data Hub
